@@ -7,8 +7,8 @@ const canvas = document.getElementById('snake');
     const leaderboardForm = document.getElementById('leaderboard-form');
     const playerNameInput = document.getElementById('player-name');
     const leaderboardKey = 'wormhole-snake-top5';
-    const leaderboardApi = 'https://api.wherealiens.com/leaderboard';
-    const leaderboardEnabled = true;
+    const leaderboardApi = '';
+    const leaderboardEnabled = false;
     const gridSize = 18;
     const tileCount = canvas.width / gridSize;
 
