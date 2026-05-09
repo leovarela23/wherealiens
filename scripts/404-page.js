@@ -78,12 +78,7 @@ const canvas = document.getElementById('snake');
         saveLocalLeaderboard(scores);
         return scores;
       } catch (e) {
-        const entries = loadLocalLeaderboard();
-        entries.push({ name, score });
-        entries.sort((a, b) => b.score - a.score);
-        const top5 = entries.slice(0, 5);
-        saveLocalLeaderboard(top5);
-        return top5;
+        throw e;
       }
     }
 
@@ -279,9 +274,13 @@ const canvas = document.getElementById('snake');
       event.preventDefault();
       if (pendingLeaderboardScore === null) return;
       const name = playerNameInput.value.trim() || 'Anonymous';
-      const scores = await submitSharedScore(name, pendingLeaderboardScore);
-      renderLeaderboard(scores);
-      hideLeaderboardForm();
+      try {
+        const scores = await submitSharedScore(name, pendingLeaderboardScore);
+        renderLeaderboard(scores);
+        hideLeaderboardForm();
+      } catch (error) {
+        alert('Score could not be saved to the shared leaderboard. Please try again.');
+      }
     });
 
     document.addEventListener('keydown', (event) => {
