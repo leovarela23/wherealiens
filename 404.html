@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>404 · Off Map</title>
+  <link rel="icon" href="/assets/alien.ico" type="image/x-icon">
+  <style>
+    :root {
+      --bg: #04050b;
+      --bg-2: #111329;
+      --text: #f7f9ff;
+      --muted: #a3aed1;
+      --blue: #7ca8ff;
+      --violet: #a16bff;
+      --line: rgba(255,255,255,0.12);
+      --line-strong: rgba(124,168,255,0.24);
+      --panel: rgba(9, 10, 22, 0.62);
+      --panel-2: rgba(255,255,255,0.03);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 80% 20%, rgba(161,107,255,0.22), transparent 20%),
+        radial-gradient(circle at 20% 80%, rgba(124,168,255,0.18), transparent 22%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .orb {
+      position: fixed;
+      width: min(70vw, 520px);
+      height: min(70vw, 520px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,168,255,0.20) 0%, rgba(124,168,255,0.02) 45%, transparent 65%);
+      filter: blur(16px);
+      pointer-events: none;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: min(920px, 100%);
+      text-align: center;
+      padding: 26px 20px 24px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 30px 80px rgba(0,0,0,.35);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 26px;
+      text-align: left;
+    }
+
+    .eyebrow {
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .menu a,
+    .links a {
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 11px 16px;
+      background: rgba(255,255,255,0.03);
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+    }
+
+    .menu a:hover,
+    .links a:hover,
+    .menu a:focus-visible,
+    .links a:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+      background: rgba(255,255,255,0.06);
+      outline: none;
+    }
+
+    .menu a.primary,
+    .links a.primary {
+      border: none;
+      background: linear-gradient(90deg, var(--blue), var(--violet));
+      color: #07111f;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(3.2rem, 13vw, 7rem);
+      letter-spacing: -.06em;
+      line-height: .92;
+    }
+
+    p {
+      margin: 0 auto 12px;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .game-section {
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .game-title {
+      font-size: 1rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin: 0;
+    }
+
+    .score {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .game-layout {
+      display: grid;
+      gap: 18px;
+      align-items: start;
+      justify-items: center;
+    }
+
+    canvas {
+      width: min(100%, 360px);
+      height: auto;
+      aspect-ratio: 1;
+      display: block;
+      background: linear-gradient(180deg, rgba(4, 8, 20, 0.95), rgba(11, 19, 40, 0.95));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: inset 0 0 30px rgba(98, 217, 255, 0.06), 0 18px 40px rgba(0,0,0,.24);
+      touch-action: none;
+    }
+
+    .side-panel {
+      display: grid;
+      gap: 18px;
+      width: 100%;
+      justify-items: center;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(3, 64px);
+      grid-template-rows: repeat(3, 64px);
+      gap: 10px;
+      justify-content: center;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .controls button {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-size: 1.2rem;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+      touch-action: manipulation;
+      transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+    }
+
+    .controls button:active,
+    .controls button.is-active {
+      transform: scale(.97);
+      background: rgba(124,168,255,0.18);
+      border-color: var(--line-strong);
+    }
+
+    .up { grid-column: 2; grid-row: 1; }
+    .left { grid-column: 1; grid-row: 2; }
+    .down { grid-column: 2; grid-row: 2; }
+    .right { grid-column: 3; grid-row: 2; }
+
+    .leaderboard {
+      width: min(100%, 320px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255,255,255,0.03);
+      text-align: left;
+    }
+
+    .leaderboard h3 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .leaderboard ol {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .leaderboard li {
+      margin-bottom: 8px;
+      padding-left: 4px;
+    }
+
+    .leaderboard strong {
+      color: var(--text);
+    }
+
+    .leaderboard-form {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .leaderboard-form label {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .leaderboard-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .leaderboard-row input {
+      flex: 1 1 160px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      padding: 12px 14px;
+      font: inherit;
+    }
+
+    .leaderboard-row button {
+      border: none;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font: inherit;
+      font-weight: 700;
+      color: #07111f;
+      background: linear-gradient(90deg, var(--blue), var(--violet));
+      cursor: pointer;
+    }
+
+    .hint {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: .92rem;
+      text-align: left;
+    }
+
+    .footer-note {
+      max-width: 520px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: var(--text);
+      border-bottom-color: rgba(255,255,255,0.28);
+      outline: none;
+    }
+
+    @media (max-width: 759px) {
+      .topbar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .menu {
+        width: 100%;
+      }
+
+      .menu a {
+        flex: 1 1 auto;
+        min-width: 120px;
+      }
+
+      .footer {
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+    @media (min-width: 760px) {
+      .card { padding: 32px 38px 30px; }
+      .game-layout {
+        grid-template-columns: minmax(0, 360px) auto;
+        justify-content: center;
+      }
+      .side-panel {
+        align-self: center;
+      }
+    }
+  </style>
+  </head>
+<body>
+  <div class="orb"></div>
+  <section class="card">
+    <div class="topbar">
+      <div class="eyebrow">404 · Lost in space</div>
+      <nav class="menu" aria-label="Site navigation preview">
+        <a href="/">Home</a>
+      </nav>
+    </div>
+
+    <h1>404</h1>
+    <p>This page slipped outside the known coordinates.</p>
+    <p>You have reached a quiet edge of the map. The signal is still elegant, the route just is not here.</p>
+
+    <div class="links">
+      <a class="primary" href="/">Return to base</a>
+    </div>
+
+    <div class="game-section">
+      <div class="game-header">
+        <h2 class="game-title">Wormhole Snake</h2>
+        <div class="score">Score: <span id="score">0</span></div>
+        <div class="score">Best score: <span id="best-score">0</span></div>
+      </div>
+      <div class="game-layout">
+        <canvas id="snake" width="360" height="360" aria-label="Snake game"></canvas>
+        <div class="side-panel">
+          <div class="controls" aria-label="Touch controls for snake game">
+            <button class="up" data-dir="up" aria-label="Move up">↑</button>
+            <button class="left" data-dir="left" aria-label="Move left">←</button>
+            <button class="down" data-dir="down" aria-label="Move down">↓</button>
+            <button class="right" data-dir="right" aria-label="Move right">→</button>
+          </div>
+
+          <div class="leaderboard">
+            <h3>Top scorers</h3>
+            <ol id="leaderboard-list"></ol>
+            <form id="leaderboard-form" class="leaderboard-form" style="display:none;">
+              <label for="player-name">You made the leaderboard</label>
+              <div class="leaderboard-row">
+                <input id="player-name" name="player-name" type="text" maxlength="24" placeholder="Your name" required>
+                <button type="submit">Save</button>
+              </div>
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAADLX0ic9sA0IreIc"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <p class="hint">Desktop: arrow keys or WASD. Mobile: use the touch controls. If you lose the signal, tap a direction or press a key to restart.</p>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-note">Tracking the edges of signal, anomaly, and strange coordinates.</div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        
+      </div>
+    </footer>
+  </section>
+
+  <script src="/scripts/404-page.js"></script>
+</body>
+</html>
