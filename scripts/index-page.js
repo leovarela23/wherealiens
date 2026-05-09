@@ -57,7 +57,7 @@ const canvas = document.getElementById('snake');
       }
     }
 
-    async function submitSharedScore(name, score, turnstileToken) {
+    async function submitSharedScore(name, score) {
       if (!leaderboardEnabled) {
         const entries = loadLocalLeaderboard();
         entries.push({ name, score });
@@ -70,7 +70,7 @@ const canvas = document.getElementById('snake');
         const response = await fetch(leaderboardApi, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, score, turnstileToken })
+          body: JSON.stringify({ name, score })
         });
         if (!response.ok) throw new Error('submit failed');
         const data = await response.json();
@@ -278,16 +278,10 @@ const canvas = document.getElementById('snake');
     leaderboardForm.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (pendingLeaderboardScore === null) return;
-      const turnstileToken = window.turnstile?.getResponse();
-      if (!turnstileToken) {
-        alert('Please complete the verification first.');
-        return;
-      }
       const name = playerNameInput.value.trim() || 'Anonymous';
-      const scores = await submitSharedScore(name, pendingLeaderboardScore, turnstileToken);
+      const scores = await submitSharedScore(name, pendingLeaderboardScore);
       renderLeaderboard(scores);
       hideLeaderboardForm();
-      window.turnstile?.reset();
     });
 
     document.addEventListener('keydown', (event) => {
