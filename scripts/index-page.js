@@ -57,7 +57,7 @@ const canvas = document.getElementById('snake');
       }
     }
 
-    async function submitSharedScore(name, score) {
+    async function submitSharedScore(name, score, turnstileToken) {
       if (!leaderboardEnabled) {
         const entries = loadLocalLeaderboard();
         entries.push({ name, score });
@@ -70,7 +70,7 @@ const canvas = document.getElementById('snake');
         const response = await fetch(leaderboardApi, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, score })
+          body: JSON.stringify({ name, score, turnstileToken })
         });
         if (!response.ok) throw new Error('submit failed');
         const data = await response.json();
@@ -78,7 +78,12 @@ const canvas = document.getElementById('snake');
         saveLocalLeaderboard(scores);
         return scores;
       } catch (e) {
-        throw e;
+        const entries = loadLocalLeaderboard();
+        entries.push({ name, score });
+        entries.sort((a, b) => b.score - a.score);
+        const top5 = entries.slice(0, 5);
+        saveLocalLeaderboard(top5);
+        return top5;
       }
     }
 
@@ -273,14 +278,16 @@ const canvas = document.getElementById('snake');
     leaderboardForm.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (pendingLeaderboardScore === null) return;
-      const name = playerNameInput.value.trim() || 'Anonymous';
-      try {
-        const scores = await submitSharedScore(name, pendingLeaderboardScore);
-        renderLeaderboard(scores);
-        hideLeaderboardForm();
-      } catch (error) {
-        alert('Score could not be saved to the shared leaderboard. Please try again.');
+      const turnstileToken = window.turnstile?.getResponse();
+      if (!turnstileToken) {
+        alert('Please complete the verification first.');
+        return;
       }
+      const name = playerNameInput.value.trim() || 'Anonymous';
+      const scores = await submitSharedScore(name, pendingLeaderboardScore, turnstileToken);
+      renderLeaderboard(scores);
+      hideLeaderboardForm();
+      window.turnstile?.reset();
     });
 
     document.addEventListener('keydown', (event) => {
