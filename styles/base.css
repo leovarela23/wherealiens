@@ -1,0 +1,26 @@
+:root {
+  --bg: #04050b;
+  --bg-2: #111329;
+  --text: #f7f9ff;
+  --muted: #a3aed1;
+  --blue: #7ca8ff;
+  --violet: #a16bff;
+  --line: rgba(255,255,255,0.12);
+  --line-strong: rgba(124,168,255,0.24);
+  --panel: rgba(9, 10, 22, 0.62);
+  --panel-2: rgba(255,255,255,0.03);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  min-height: 100vh;
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 80% 20%, rgba(161,107,255,0.22), transparent 20%),
+    radial-gradient(circle at 20% 80%, rgba(124,168,255,0.18), transparent 22%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  overflow-x: hidden;
+}
+a { color: inherit; }
+img { max-width: 100%; display: block; }

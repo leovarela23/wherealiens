@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Map · WhereAliens</title>
+  <link rel="icon" href="/assets/alien.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/styles/base.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/components.css">
+  <link rel="stylesheet" href="/styles/pages/map.css">
+</head>
+<body>
+  <div class="orb"></div>
+  <div class="site-shell">
+    <header class="topbar">
+      <div>
+        <div class="brand">WhereAliens</div>
+      </div>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/" >Home</a>
+        <a href="/map/" class="active">Map</a>
+        <a href="/stats/" >Stats</a>
+        <a href="/news/" >News</a>
+        <a href="/sources/" >Sources</a>
+      </nav>
+    </header>
+
+    <main class="section">
+  <div class="meta">V1 shell</div>
+  <h1 class="hero-title">Sightings map</h1>
+  <p class="lead">This page will anchor the core exploration experience, with global sightings, filters, visible source labels, and linked records.</p>
+  <div class="card-grid">
+    <article class="card"><h3>Map canvas</h3><p>Reserved for the interactive map and markers.</p></article>
+    <article class="card"><h3>Filters</h3><p>Year, country, shape, source, and keyword filters will live here.</p></article>
+    <article class="card"><h3>Results</h3><p>A visible list of the latest or matching sightings will sit next to the map.</p></article>
+  </div>
+</main>
+
+    <footer class="footer">
+      <div>WhereAliens is a non-commercial project exploring UFO data, reporting, and media with visible source attribution.</div>
+    </footer>
+  </div>
+  <script src="/scripts/core/app.js"></script>
+  <script src="/scripts/core/utils.js"></script>
+  <script src="/scripts/pages/map.js"></script>
+</body>
+</html>
