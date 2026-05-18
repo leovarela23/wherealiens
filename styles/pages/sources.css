@@ -1,10 +1,19 @@
-.page-columns {
-  display: grid;
-  gap: 18px;
+.source-card ul {
+  margin: 14px 0 18px;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.65;
 }
-.highlight {
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 22px;
-  padding: 18px;
-  background: rgba(255,255,255,0.03);
+.source-type {
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .74rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
 }

@@ -14,28 +14,64 @@
   <div class="orb"></div>
   <div class="site-shell">
     <header class="topbar">
-      <div>
-        <div class="brand">WhereAliens</div>
-      </div>
+      <div><div class="brand">WhereAliens</div></div>
       <nav class="nav" aria-label="Primary navigation">
-        <a href="/" >Home</a>
+        <a href="/">Home</a>
         <a href="/map/" class="active">Map</a>
-        <a href="/stats/" >Stats</a>
-        <a href="/news/" >News</a>
-        <a href="/sources/" >Sources</a>
+        <a href="/stats/">Stats</a>
+        <a href="/news/">News</a>
+        <a href="/sources/">Sources</a>
       </nav>
     </header>
 
     <main class="section">
-  <div class="meta">V1 shell</div>
-  <h1 class="hero-title">Sightings map</h1>
-  <p class="lead">This page will anchor the core exploration experience, with global sightings, filters, visible source labels, and linked records.</p>
-  <div class="card-grid">
-    <article class="card"><h3>Map canvas</h3><p>Reserved for the interactive map and markers.</p></article>
-    <article class="card"><h3>Filters</h3><p>Year, country, shape, source, and keyword filters will live here.</p></article>
-    <article class="card"><h3>Results</h3><p>A visible list of the latest or matching sightings will sit next to the map.</p></article>
-  </div>
-</main>
+      <div class="meta">V1 map shell</div>
+      <h1 class="hero-title">Sightings map</h1>
+      <p class="lead">This page will become the core exploration layer of WhereAliens, with a global sightings map, source-aware records, and filters that let visitors move from overview to detail.</p>
+    </main>
+
+    <section class="section map-layout">
+      <aside class="map-sidebar">
+        <h2 class="section-title">Filters</h2>
+        <p class="section-copy">The first version of the map will support a focused set of filters to keep exploration useful and readable.</p>
+        <div class="card filter-card"><h3>Year</h3><p>Single year or year range selector placeholder.</p></div>
+        <div class="card filter-card"><h3>Country</h3><p>Country and region filter placeholder.</p></div>
+        <div class="card filter-card"><h3>Shape</h3><p>Shape/type filter placeholder.</p></div>
+        <div class="card filter-card"><h3>Source</h3><p>Source filter placeholder with visible attribution grouping.</p></div>
+      </aside>
+
+      <div class="map-main">
+        <div class="map-canvas card">
+          <h2>Interactive map area</h2>
+          <p>The live map canvas will render here, with markers, clustering if needed, and source-aware popups.</p>
+        </div>
+
+        <div class="card results-card">
+          <h2>Visible sightings</h2>
+          <p>This panel will list the latest or currently visible sightings, each with date, place, type, short summary, and source label.</p>
+          <ul class="results-list">
+            <li><strong>Example record</strong><span>Date, place, shape, source</span></li>
+            <li><strong>Example record</strong><span>Date, place, shape, source</span></li>
+            <li><strong>Example record</strong><span>Date, place, shape, source</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section methodology-grid">
+      <div class="highlight">
+        <h2 class="section-title">How the map should work</h2>
+        <p class="section-copy">Each visible point should remain tied to a named source, and no record should appear without enough metadata to understand where it came from.</p>
+      </div>
+      <div class="highlight">
+        <h2 class="section-title">Source labeling</h2>
+        <p class="section-copy">The map should visually distinguish official, curated, and community-sourced records wherever possible.</p>
+      </div>
+      <div class="highlight">
+        <h2 class="section-title">V1 boundary</h2>
+        <p class="section-copy">The first goal is a clean, understandable map shell with clear filters and a solid results layout before pushing deeper interactivity.</p>
+      </div>
+    </section>
 
     <footer class="footer">
       <div>WhereAliens is a non-commercial project exploring UFO data, reporting, and media with visible source attribution.</div>

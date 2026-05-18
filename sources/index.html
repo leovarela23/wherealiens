@@ -14,28 +14,74 @@
   <div class="orb"></div>
   <div class="site-shell">
     <header class="topbar">
-      <div>
-        <div class="brand">WhereAliens</div>
-      </div>
+      <div><div class="brand">WhereAliens</div></div>
       <nav class="nav" aria-label="Primary navigation">
-        <a href="/" >Home</a>
-        <a href="/map/" >Map</a>
-        <a href="/stats/" >Stats</a>
-        <a href="/news/" >News</a>
+        <a href="/">Home</a>
+        <a href="/map/">Map</a>
+        <a href="/stats/">Stats</a>
+        <a href="/news/">News</a>
         <a href="/sources/" class="active">Sources</a>
       </nav>
     </header>
 
     <main class="section">
-  <div class="meta">V1 shell</div>
-  <h1 class="hero-title">Sources and methodology</h1>
-  <p class="lead">This page will explain exactly which datasets and references power the site, what each source is good at, and where its limits are.</p>
-  <div class="card-grid">
-    <article class="card"><h3>war.gov/ufo</h3><p>Official and government-facing reference material.</p></article>
-    <article class="card"><h3>CORGIS</h3><p>Structured sightings dataset for mapping and charting.</p></article>
-    <article class="card"><h3>NUFORC</h3><p>Community sightings source, subject to permission and attribution handling.</p></article>
-  </div>
-</main>
+      <div class="meta">V1 sources</div>
+      <h1 class="hero-title">Sources and methodology</h1>
+      <p class="lead">WhereAliens is meant to be source-forward. This page explains where the data and references come from, what each source is useful for, and where caution is needed.</p>
+    </main>
+
+    <section class="section">
+      <h2 class="section-title">Core sources</h2>
+      <p class="section-copy">These are the primary references planned for the first version of the site. Every section of WhereAliens should clearly name its source and avoid blurring official, curated, and community material together.</p>
+      <div class="card-grid">
+        <article class="card source-card">
+          <div class="source-type">Official / government</div>
+          <h3>war.gov/ufo</h3>
+          <p>Used for official and government-facing reference material, background context, and public-facing documents or summaries where available.</p>
+          <ul>
+            <li><strong>Strength:</strong> institutional credibility</li>
+            <li><strong>Use in V1:</strong> context, references, source transparency</li>
+            <li><strong>Caveat:</strong> not a broad sightings dataset</li>
+          </ul>
+          <a class="button" href="https://www.war.gov/ufo/" target="_blank" rel="noreferrer">Visit source</a>
+        </article>
+        <article class="card source-card">
+          <div class="source-type">Structured dataset</div>
+          <h3>CORGIS UFO Sightings</h3>
+          <p>Used for structured sightings data, especially for map rendering, charting, trend analysis, and filterable exploration.</p>
+          <ul>
+            <li><strong>Strength:</strong> clean data structure</li>
+            <li><strong>Use in V1:</strong> map and stats</li>
+            <li><strong>Caveat:</strong> scope and recency limits must be stated clearly</li>
+          </ul>
+        </article>
+        <article class="card source-card">
+          <div class="source-type">Community sightings archive</div>
+          <h3>NUFORC</h3>
+          <p>Potential source for richer sightings coverage and public reporting history, but it should be handled with permission, attribution, and clear source labeling.</p>
+          <ul>
+            <li><strong>Strength:</strong> deep community reporting archive</li>
+            <li><strong>Use in V1:</strong> planned / conditional</li>
+            <li><strong>Caveat:</strong> use should follow permission or acceptable terms</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section methodology-grid">
+      <div class="highlight">
+        <h2 class="section-title">Methodology principles</h2>
+        <p class="section-copy">WhereAliens should separate data types instead of flattening them together. Official, curated, and community sources each serve different purposes and should be labeled that way.</p>
+      </div>
+      <div class="highlight">
+        <h2 class="section-title">Attribution rules</h2>
+        <p class="section-copy">Every chart, map result, article, or media reference should visibly state its source, and where relevant, the time range or scope behind it.</p>
+      </div>
+      <div class="highlight">
+        <h2 class="section-title">Known limitations</h2>
+        <p class="section-copy">Coverage, recency, and classification quality vary by source. The site should show those limits explicitly instead of implying perfect completeness.</p>
+      </div>
+    </section>
 
     <footer class="footer">
       <div>WhereAliens is a non-commercial project exploring UFO data, reporting, and media with visible source attribution.</div>
