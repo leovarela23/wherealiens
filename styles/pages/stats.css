@@ -1,10 +1,29 @@
-.page-columns {
+.stats-grid {
   display: grid;
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
 }
-.highlight {
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 22px;
-  padding: 18px;
-  background: rgba(255,255,255,0.03);
+.stat-card {
+  display: grid;
+  gap: 10px;
+}
+.stat-label {
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .74rem;
+  font-weight: 700;
+}
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+}
+.chart-grid,
+.methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.chart-card {
+  min-height: 180px;
 }
